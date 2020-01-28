@@ -2,8 +2,8 @@
 
 // Copyright 2019  Dimontich
 
-#ifndef INCLUDE_JSON_HPP
-#define INCLUDE_JSON_HPP
+#ifndef INCLUDE_JSON_HPP_
+#define INCLUDE_JSON_HPP_
 
 #include <iostream>
 #include <fstream>
@@ -26,7 +26,7 @@ private:
     void parse_object(const std::string& s, int& a, int& b);
     void parse_array(const std::string& s, int& a, int& b);
 public:
-    Json(const std::string& s);
+    explicit Json(const std::string& s);
     bool is_array() const;
     bool is_object() const;
     std::any operator[](const std::string& key);
@@ -36,4 +36,4 @@ public:
 };
 
 
-#endif //INCLUDE_JSON_HPP
+#endif //INCLUDE_JSON_HPP_

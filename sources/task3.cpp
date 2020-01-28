@@ -22,7 +22,8 @@ int main() {
     if (input_json[0].size() != input_json[1].size() ||
         input_json[0].size() != input_json[2].size())  // Size-check
     {
-        std::cout << "Wrong syntax: inequality of the number of elements in arrays"
+        std::cout << "Wrong syntax: "
+                     "inequality of the number of elements in arrays"
                   << std::endl;
         return 1;
     }
