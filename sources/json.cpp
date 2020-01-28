@@ -138,7 +138,8 @@ void Json::parse_object(const std::string &s, int &a, int &b) {
                         throw std::exception();
                     if (static_cast<int>(s.substr
                     (a + 1, b - a).find('.')) != -1) {
-                        int c = static_cast<int>(s.substr(a + 1, b - a).find('.') + a + 1);
+                        int c = static_cast<int>(s.substr
+                                (a + 1, b - a).find('.') + a + 1);
 
                         if (static_cast<int>(
                                     s.substr(c - 1, 1)
