@@ -19,8 +19,7 @@ HunterGate(
 )
 
 
-# TODO: rename project and delete this comment
-project(template)
+project(json_parser)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
@@ -28,25 +27,30 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
-# TODO: change template word to project name and delete this comment
-add_library(template STATIC
-  # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
-)
+hunter_add_package(nlohmann_json)
+find_package(nlohmann_json CONFIG REQUIRED)
+
+add_library(json_parser STATIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/json.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/task3.cpp)
+
 add_executable(tests
-  # TODO: enum your files and delete this comment
   ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
 )
 
-# TODO: change template word to project name and delete this comment
-target_include_directories(template 
+add_executable(task3
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/task3.cpp
+        )
+
+target_include_directories(json_parser
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_include_directories(tests 
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-# TODO: change template word to project name and delete this comment
-target_link_libraries(tests GTest::main template)
+target_link_libraries(tests GTest::main json_parser)
+
+target_link_libraries(task3 PUBLIC nlohmann_json::nlohmann_json)
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests) 
@@ -55,8 +59,7 @@ if(BUILD_COVERAGE)
   set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
   find_package(codecov)
-  # TODO: change template word to project name and delete this comment
-  add_coverage(template)
+  add_coverage(json_parser)
   add_coverage(tests)
   list(APPEND LCOV_REMOVE_PATTERNS "'${PROJECT_SOURCE_DIR}/tests/*'")
   coverage_evaluate()
