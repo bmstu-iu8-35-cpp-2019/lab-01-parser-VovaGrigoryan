@@ -30,6 +30,8 @@ find_package(GTest CONFIG REQUIRED)
 hunter_add_package(nlohmann_json)
 find_package(nlohmann_json CONFIG REQUIRED)
 
+link_libraries(nlohmann_json::nlohmann_json)
+
 add_library(json_parser STATIC
         ${CMAKE_CURRENT_SOURCE_DIR}/sources/json.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/sources/task3.cpp)
@@ -49,8 +51,6 @@ target_include_directories(tests
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_link_libraries(tests GTest::main json_parser)
-
-target_link_libraries(task3 PUBLIC nlohmann_json::nlohmann_json)
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests) 
